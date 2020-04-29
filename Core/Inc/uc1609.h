@@ -10,12 +10,14 @@
 
 #include "main.h"
 
-//定义OLED借口
+//定义LCD屏接线
+
 //RST脚直接接在MCU的复位脚上
-//CS直接	接地
-//SCK接	PB6
-//SDA接	PB7
-//DC接	PB8
+//CS直接	PA4
+//SCK接	PA5
+//CD接     PA6
+//SDA接	PA7
+
 
 extern uint8_t disp_buf[];
 
