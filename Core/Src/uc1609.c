@@ -410,14 +410,19 @@ void lcd_sendcmd(uint8_t cmd)
 //OLED初始化函数
 void lcd_init(void)
 {
+  //拉低复位脚0.2秒完成复位
+  HAL_Delay(200);
+  HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_SET);
+  HAL_Delay(20);
+
   //初始化OLED
   lcd_sendcmd(0xe2);						//显示屏复位指令
-  lcd_sendcmd(0xa3);//设置帧速率[A0: 76fps, A1b: 95fps, A2b: 132fps, A3b: 168fps(fps: frame-per-second)]
+  lcd_sendcmd(0xa3);            //设置帧速率[A0: 76fps, A1b: 95fps, A2b: 132fps, A3b: 168fps(fps: frame-per-second)]
   lcd_sendcmd(0xeb);						//设置LCD偏置比(亮度设置)
   lcd_sendcmd(0x2f);						//显示屏功耗设置
   lcd_sendcmd(0xc2);						//设置LCD映射控制
-  lcd_sendcmd(0x81);					//设置SEG偏置电压(对比度) 双字节指令
-  lcd_sendcmd(180); 					//设置SEG偏置电压(对比度) 双字节指令
+  lcd_sendcmd(0x81);					  //设置SEG偏置电压(对比度) 双字节指令
+  lcd_sendcmd(180); 					  //设置SEG偏置电压(对比度) 双字节指令
   lcd_sendcmd(0xaf);						//开启显示指令
 
   //启动定时器10，开始定时DMA刷新
