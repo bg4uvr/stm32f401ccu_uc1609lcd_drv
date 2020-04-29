@@ -12,11 +12,11 @@
 
 //定义LCD屏接线
 
-//RST脚直接接在MCU的复位脚上
-//CS直接	PA4
-//SCK接	PA5
-//CD接     PA6
-//SDA接	PA7
+//RST   PA3
+//CS    PA4
+//SCK   PA5
+//CD    PA6
+//SDA   PA7
 
 
 extern uint8_t disp_buf[];
