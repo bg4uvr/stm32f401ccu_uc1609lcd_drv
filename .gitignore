@@ -1,3 +1,13 @@
 Debug/*
 Release/*
+.settings/*
 *.launch
+.cproject
+.mxproject
+.project
+
+!*.c
+!*.h
+!*.s
+!*.ld
+!*.ioc
