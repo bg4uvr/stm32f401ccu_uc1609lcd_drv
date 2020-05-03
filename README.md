@@ -27,6 +27,10 @@
 
 https://v.youku.com/v_show/id_XNDY1MzcxOTUyNA==.html
 
+
+有朋友可能觉得，这好像也没看出有啥快的啊，好吧我重新拍了个视频
+https://v.youku.com/v_show/id_XNDY1ODE4NDc4OA==.html
+
 **完整实验代码下载地址：**
 [Gitee](https://gitee.com/bg4uvr/stm32f401ccu_uc1609lcd_drv)
 [Github](https://github.com/bg4uvr/stm32f401ccu_uc1609lcd_drv)
