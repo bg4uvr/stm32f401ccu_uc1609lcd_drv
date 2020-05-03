@@ -10,6 +10,7 @@
 
 #include "main.h"
 
+
 //定义LCD屏接线
 
 //RST   PA3
@@ -17,6 +18,9 @@
 //SCK   PA5
 //CD    PA6
 //SDA   PA7
+
+//将 printf 重定向到 LCD 屏幕，不需要本功能可以将本行消释掉即可
+#define USE_LCDPRINT
 
 extern uint8_t disp_buf[];
 

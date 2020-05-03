@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include "uc1609.h"
 #include "stdlib.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -113,6 +114,14 @@ int main(void)
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	uint8_t i, j;
+
+	//演示 printf 功能
+	for(i=0;i<200;i++)
+	{
+		printf(" this is line %d\r\n",i);
+		HAL_Delay(300);
+	}
+
 	while (1)
 	{
 		/* USER CODE END WHILE */

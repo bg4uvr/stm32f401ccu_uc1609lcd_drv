@@ -6,6 +6,7 @@
  */
 
 #include "uc1609.h"
+#include "string.h"
 
 //定义字库
 const uint8_t Font5x8[][5] =
@@ -399,6 +400,53 @@ const uint8_t Font816[][16] =
 		0x07, 0x07, 0x04, 0x04, 0x04, 0x07, 0x07, 0x00 }, };
 
 uint8_t disp_buf[1536];
+
+#ifdef USE_LCDPRINT
+#ifdef __GNUC__
+/* With GCC, small printf (option LD Linker->Libraries->Small printf
+ set to 'Yes') calls __io_putchar() */
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+
+PUTCHAR_PROTOTYPE
+{
+	static uint8_t x, y;
+
+	switch (ch)
+	{
+	case '\r':
+		x = 0;
+		break;
+	case '\n':
+		y++;
+		if (y > 7)
+		{
+			memcpy(disp_buf, &disp_buf[192], 1536 - 192);
+			memset(&disp_buf[192 * 7 - 1], 0, 192);
+			y = 7;
+		}
+		break;
+	default:
+		display_one_char(x, y, (char) ch, 0);
+		x += 6;
+		if (x > (192 - 6))
+		{
+			x = 0;
+			y++;
+			if (y > 7)
+			{
+				memcpy(disp_buf, &disp_buf[192], 1536 - 192);
+				memset(&disp_buf[192 * 7 - 1], 0, 192);
+				y = 7;
+			}
+		}
+	}
+
+	return ch;
+}
+#endif
 
 //发送OLED命令
 void lcd_sendcmd(uint8_t cmd)
