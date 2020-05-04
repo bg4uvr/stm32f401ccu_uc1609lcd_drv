@@ -113,14 +113,7 @@ int main(void)
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
-	uint8_t i, j;
-
-	//演示 printf 功能
-	for(i=0;i<200;i++)
-	{
-		printf(" this is line %d\r\n",i);
-		HAL_Delay(300);
-	}
+	uint8_t i=0, j=0;
 
 	while (1)
 	{
@@ -133,33 +126,37 @@ int main(void)
 		case 0:
 			display_816_char(rand() % 192 / 8 * 8, rand() % 8 / 2 * 2,
 					rand() % 96 + 0x20, rand() % 2);
-			HAL_Delay(10);
 			break;
-		//全屏随机起止点画直线
+			//全屏随机起止点画直线
 		case 1:
-			glcd_line(rand() % 192, rand() % 64, rand() % 128, rand() % 64,
-					rand() % 3);
-			HAL_Delay(10);
+			glcd_line(rand() % 192, rand() % 64, rand() % 128, rand() % 64, 2);
 			break;
-		//全屏随机圆心半径画圆
+			//全屏随机圆心半径画圆
 		case 2:
-			glcd_circle(rand() % 192, rand() % 64, rand() % 90, rand() % 3);
-			HAL_Delay(10);
+			glcd_circle(rand() % 192, rand() % 64, rand() % 90, 2);
 			break;
-		//全屏随机坐标画点
+			//全屏随机坐标画点
 		case 3:
-			gui_point(rand() % 192, rand() % 64, rand() % 3);
-			HAL_Delay(10);
+			gui_point(rand() % 192, rand() % 64, 1);
+			break;
+		case 4:
+			//演示 printf 功能
+			printf(" this is line %d\r\n", j);
 			break;
 		}
+
+		//每条演示指令后延迟10毫秒，不然因为本驱动实在是太快了，看不清，哈哈~
+		HAL_Delay(10);
+
 		//每种演示250次后，清屏切换下一种演示
 		if (++j == 250)
 		{
 			j = 0;
 			lcd_cls(0);
-			if (++i == 4)
+			if (++i == 5)
 				i = 0;
 		}
+
 	}
 	/* USER CODE END 3 */
 }
